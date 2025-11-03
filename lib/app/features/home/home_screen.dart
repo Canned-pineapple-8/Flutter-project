@@ -15,19 +15,63 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'image': 'assets/images/tigrash.jpg',
       'title': 'Tigrash',
-      'description': 'Описание Тиграша 1',
+      'description': 'Просто кот',
     },
     {
-      'image': 'assets/images/talik.png',
+      'image': 'assets/images/talik.jpg',
       'title': 'Talik',
-      'description': 'Описание Талика 2',
+      'description': 'Немецкий шпиц',
     },
     {
-      'image': 'assets/images/test_image.jpg',
-      'title': 'Example',
-      'description': 'Описание примера 3',
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
     },
-    // можно добавить столько элементов, сколько нужно
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
   ];
 
   @override

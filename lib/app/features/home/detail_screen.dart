@@ -23,7 +23,12 @@ class DetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(imagePath), // показываем картинку
+            Image.asset(
+              imagePath,
+              height: 500,
+              width: 500, // растянет по ширине экрана
+              fit: BoxFit.cover,
+            ),
             SizedBox(height: 16), // отступ после картинки
             Text(
               title,
