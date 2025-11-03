@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../app.dart'; // Для расширений ph/pw
 
 class ContentCard extends StatelessWidget {
-  const ContentCard({super.key});
+  final String imagePath; // путь к изображению
+  final String title; // заголовок
+  final String description; // описание
+
+  const ContentCard({
+    super.key,
+    required this.imagePath,
+    required this.title,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
     final imageSize = 100.0;
 
     return InkWell(
-      // onTap: () => context.push('/content/${content.id}'),
+      onTap: () {
+        // При нажатии открываем DetailScreen, передавая данные карточки
+        context.push(
+          '/detail',
+          extra: {
+            'image': imagePath,
+            'title': title,
+            'description': description,
+          },
+        );
+      },
       borderRadius: BorderRadius.circular(16),
       child: SizedBox(
         height: imageSize,
@@ -19,7 +39,7 @@ class ContentCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                'assets/images/tigrash.jpg',
+                imagePath, // теперь используем путь из параметра
                 height: imageSize,
                 width: imageSize,
                 fit: BoxFit.cover,
@@ -31,7 +51,7 @@ class ContentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Title',
+                    title, // используем параметр title
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge,
@@ -39,7 +59,7 @@ class ContentCard extends StatelessWidget {
                   4.ph,
                   Expanded(
                     child: Text(
-                      'Description',
+                      description, // используем параметр description
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium,
