@@ -17,13 +17,19 @@ final router = GoRouter(
       pageBuilder: (_, state) =>
           MaterialPage(key: state.pageKey, child: const HomeScreen()),
     ),
-    // Для следующей лабораторной:
-    // GoRoute(
-    //   path: '/content/:id',
-    //   pageBuilder: (_, state) => MaterialPage(
-    //     key: state.pageKey,
-    //     child: ContentScreen(contentId: state.pathParameters['id']!),
-    //   ),
-    // ),
+    GoRoute(
+      path: '/detail',
+      pageBuilder: (context, state) {
+        final args = state.extra as Map<String, String>;
+        return MaterialPage(
+          key: state.pageKey,
+          child: DetailScreen(
+            imagePath: args['image']!,
+            title: args['title']!,
+            description: args['description']!,
+          ),
+        );
+      },
+    ),
   ],
 );

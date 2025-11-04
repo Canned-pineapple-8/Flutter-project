@@ -10,12 +10,75 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List<Map<String, String>> contentList = [
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
+    {
+      'image': 'assets/images/tigrash.jpg',
+      'title': 'Tigrash',
+      'description': 'Просто кот',
+    },
+    {
+      'image': 'assets/images/talik.jpg',
+      'title': 'Talik',
+      'description': 'Немецкий шпиц',
+    },
+    {
+      'image': 'assets/images/pushinka.jpg',
+      'title': 'Pushinka',
+      'description': 'Британская кошка',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: const Text('Home')),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           spacing: 20,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,9 +87,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ListView.separated(
               primary: false,
               shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (_, __) => ContentCard(),
-              separatorBuilder: (_, __) => 16.ph,
+              itemCount: contentList.length,
+              itemBuilder: (context, index) {
+                final content = contentList[index];
+                return ContentCard(
+                  imagePath: content['image']!,
+                  title: content['title']!,
+                  description: content['description']!,
+                );
+              },
+              separatorBuilder: (_, _) => 16.ph,
             ),
           ],
         ),
