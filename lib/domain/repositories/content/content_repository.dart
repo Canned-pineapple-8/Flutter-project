@@ -1,0 +1,21 @@
+import 'package:dio/dio.dart';
+import 'model/content.dart';
+import '../../../data/endpoints.dart';
+import 'content_repository_interface.dart';
+
+class ContentRepository implements ContentRepositoryInterface {
+  final Dio dio;
+
+  ContentRepository({required this.dio});
+
+  @override
+  Future<List<Content>> getContent() async {
+    try {
+      final response = await dio.get(Endpoints.content);
+      final List data = response.data['products']; // "products" вместо "data"
+      return data.map((e) => Content.fromJson(e)).toList();
+    } on DioException catch (e) {
+      throw e.message.toString();
+    }
+  }
+}

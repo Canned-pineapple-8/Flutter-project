@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../widgets/content_card.dart';
-import '../../extensions/widget_extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../di/di.dart';
+import 'bloc/bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,96 +12,59 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, String>> contentList = [
-    {
-      'image': 'assets/images/tigrash.jpg',
-      'title': 'Tigrash',
-      'description': 'Просто кот',
-    },
-    {
-      'image': 'assets/images/talik.jpg',
-      'title': 'Talik',
-      'description': 'Немецкий шпиц',
-    },
-    {
-      'image': 'assets/images/pushinka.jpg',
-      'title': 'Pushinka',
-      'description': 'Британская кошка',
-    },
-    {
-      'image': 'assets/images/tigrash.jpg',
-      'title': 'Tigrash',
-      'description': 'Просто кот',
-    },
-    {
-      'image': 'assets/images/talik.jpg',
-      'title': 'Talik',
-      'description': 'Немецкий шпиц',
-    },
-    {
-      'image': 'assets/images/pushinka.jpg',
-      'title': 'Pushinka',
-      'description': 'Британская кошка',
-    },
-    {
-      'image': 'assets/images/tigrash.jpg',
-      'title': 'Tigrash',
-      'description': 'Просто кот',
-    },
-    {
-      'image': 'assets/images/talik.jpg',
-      'title': 'Talik',
-      'description': 'Немецкий шпиц',
-    },
-    {
-      'image': 'assets/images/pushinka.jpg',
-      'title': 'Pushinka',
-      'description': 'Британская кошка',
-    },
-    {
-      'image': 'assets/images/tigrash.jpg',
-      'title': 'Tigrash',
-      'description': 'Просто кот',
-    },
-    {
-      'image': 'assets/images/talik.jpg',
-      'title': 'Talik',
-      'description': 'Немецкий шпиц',
-    },
-    {
-      'image': 'assets/images/pushinka.jpg',
-      'title': 'Pushinka',
-      'description': 'Британская кошка',
-    },
-  ];
+  final _home = getIt<HomeBloc>();
+
+  void loadHome() => _home.add(const HomeLoad());
+
+  @override
+  void initState() {
+    super.initState();
+    loadHome();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          spacing: 20,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Header', style: Theme.of(context).textTheme.headlineLarge),
-            ListView.separated(
-              primary: false,
-              shrinkWrap: true,
-              itemCount: contentList.length,
-              itemBuilder: (context, index) {
-                final content = contentList[index];
-                return ContentCard(
-                  imagePath: content['image']!,
-                  title: content['title']!,
-                  description: content['description']!,
-                );
-              },
-              separatorBuilder: (_, _) => 16.ph,
+      body: BlocBuilder<HomeBloc, HomeState>(
+        bloc: _home,
+        builder: (context, state) {
+          return switch (state) {
+            HomeInitial() => const SizedBox.shrink(),
+            HomeLoadInProgress() => const Center(
+              child: CircularProgressIndicator(),
             ),
-          ],
-        ),
+            HomeLoadSuccess() => _buildHomeLoadSuccess(state),
+            HomeLoadFailure() => _buildHomeLoadFailure(state),
+          };
+        },
+      ),
+    );
+  }
+
+  Widget _buildHomeLoadSuccess(HomeLoadSuccess state) {
+    final content = state.content;
+    return ListView.builder(
+      itemCount: content.length,
+      itemBuilder: (_, index) => ContentCard(
+        imagePath: content[index].image,
+        title: content[index].title,
+        description: content[index].description,
+      ),
+    );
+  }
+
+  Widget _buildHomeLoadFailure(HomeLoadFailure state) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Ошибка: ${state.exception}'),
+          ElevatedButton(
+            onPressed: loadHome,
+            child: const Text('Попробовать снова'),
+          ),
+        ],
       ),
     );
   }

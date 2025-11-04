@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../di/di.dart';
 import '../features/features.dart';
+import '../features/home/home.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 final _rootNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
