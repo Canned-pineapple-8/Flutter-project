@@ -23,7 +23,7 @@ class DetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
+            Image.network(
               // изображение фиксированного размера (500 на 500 пикселей)
               imagePath,
               height: 500,
