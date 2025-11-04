@@ -24,7 +24,7 @@ class DetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
-              // изобрhажение фиксированного размера (500 на 500 пикселей)
+              // изображение фиксированного размера (500 на 500 пикселей)
               imagePath,
               height: 500,
               width: 500,

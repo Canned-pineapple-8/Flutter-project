@@ -12,7 +12,7 @@ class ContentRepository implements ContentRepositoryInterface {
   Future<List<Content>> getContent() async {
     try {
       final response = await dio.get(Endpoints.content);
-      final List data = response.data['products']; // "products" вместо "data"
+      final List data = response.data['products'];
       return data.map((e) => Content.fromJson(e)).toList();
     } on DioException catch (e) {
       throw e.message.toString();

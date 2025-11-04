@@ -2,7 +2,7 @@ import 'package:talker_dio_logger/talker_dio_logger.dart';
 import '../../di/di.dart';
 
 void setUpDio() {
-  dio.options.baseUrl = 'https://dummyjson.com'; // базовый URL API
+  dio.options.baseUrl = 'https://dummyjson.com';
   dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 5);
 
