@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../extensions/widget_extensions.dart';
 
 class DetailScreen extends StatelessWidget {
   final String imagePath; // путь к изображению, которое нужно показать
@@ -11,12 +12,11 @@ class DetailScreen extends StatelessWidget {
     required this.title,
     required this.description,
   });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title), // строка заголовка верхней панели
+        title: Text(title), // заголовок
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -24,23 +24,24 @@ class DetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
+              // изображение фиксированного размера (500 на 500 пикселей)
               imagePath,
               height: 500,
-              width: 500, // растянет по ширине экрана
+              width: 500,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 16), // отступ после картинки
+            16.ph, // виджет-заполнитель после картинки
             Text(
+              // текстовое поле с заголовком
               title,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineLarge, // используем тему
+              style: Theme.of(context).textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8), // отступ после заголовка
+            16.ph, // виджет-заполнитель после заголовка
             Text(
+              // текстовое поле с описанием
               description,
-              style: Theme.of(context).textTheme.bodyMedium, // описание
+              style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
           ],

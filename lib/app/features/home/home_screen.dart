@@ -10,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Пример данных для карточек
   final List<Map<String, String>> contentList = [
     {
       'image': 'assets/images/tigrash.jpg',
@@ -97,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   description: content['description']!,
                 );
               },
-              separatorBuilder: (_, __) => 16.ph,
+              separatorBuilder: (_, _) => 16.ph,
             ),
           ],
         ),

@@ -20,7 +20,6 @@ class ContentCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // При нажатии открываем DetailScreen, передавая данные карточки
         context.push(
           '/detail',
           extra: {
@@ -39,7 +38,7 @@ class ContentCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                imagePath, // теперь используем путь из параметра
+                imagePath,
                 height: imageSize,
                 width: imageSize,
                 fit: BoxFit.cover,
@@ -51,7 +50,7 @@ class ContentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title, // используем параметр title
+                    title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge,
@@ -59,7 +58,7 @@ class ContentCard extends StatelessWidget {
                   4.ph,
                   Expanded(
                     child: Text(
-                      description, // используем параметр description
+                      description,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium,
