@@ -21,14 +21,11 @@ final router = GoRouter(
     GoRoute(
       path: '/detail',
       pageBuilder: (context, state) {
-        final args = state.extra as Map<String, String>;
+        final id = state.extra as int;
+
         return MaterialPage(
           key: state.pageKey,
-          child: DetailScreen(
-            imagePath: args['image']!,
-            title: args['title']!,
-            description: args['description']!,
-          ),
+          child: DetailScreen(id: id),
         );
       },
     ),

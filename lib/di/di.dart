@@ -4,6 +4,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 import '../data/dio/set_up.dart';
 import '../domain/domain.dart';
 import '../app/features/home/home.dart';
+import '../app/features/detail/detail.dart';
 
 final getIt = GetIt.instance;
 final talker = TalkerFlutter.init();
@@ -22,4 +23,7 @@ Future<void> setupLocator() async {
   );
 
   getIt.registerSingleton(HomeBloc(getIt.get<ContentRepositoryInterface>()));
+  getIt.registerFactory(
+    () => DetailBloc(getIt.get<ContentRepositoryInterface>()),
+  );
 }

@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
       itemCount: content.length,
       itemBuilder: (_, index) => ContentCard(
+        id: content[index].id,
         imagePath: content[index].image,
         title: content[index].title,
         description: content[index].description,
