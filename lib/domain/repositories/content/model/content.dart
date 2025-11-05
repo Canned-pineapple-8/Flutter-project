@@ -10,7 +10,6 @@ class Content {
   @JsonKey(name: 'thumbnail')
   final String image;
   final double price;
-  // @JsonKey(name: 'discountPercentage')
   final double discountPercentage;
   final double rating;
 

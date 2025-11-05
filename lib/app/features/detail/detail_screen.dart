@@ -35,7 +35,7 @@ class _DetailScreenState extends State<DetailScreen> {
           }
 
           if (state is DetailLoadFailure) {
-            return Center(child: Text("Ошибка: ${state.error}"));
+            return Center(child: Text("Error: ${state.error}"));
           }
 
           if (state is DetailLoadSuccess) {
