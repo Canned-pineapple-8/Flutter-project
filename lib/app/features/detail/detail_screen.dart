@@ -66,25 +66,21 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   16.ph,
                   Text(
-                    "Цена: \$${content.price}",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    "Price: \$${content.price}",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
                   ),
                   16.ph,
                   Text(
-                    "Скидка: ${content.discountPercentage}%",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    "Discount: ${content.discountPercentage}%",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
                   ),
                   16.ph,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Рейтинг: ${content.rating}",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      6.pw,
-                      const Icon(Icons.star, color: Colors.amber),
-                    ],
+                  Text(
+                    "Rating: ${content.rating}",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
