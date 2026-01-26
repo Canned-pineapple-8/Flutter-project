@@ -5,6 +5,9 @@ import '../data/dio/set_up.dart';
 import '../domain/domain.dart';
 import '../app/features/home/home.dart';
 import '../app/features/detail/detail.dart';
+import '../app/features/auth/logout/logout.dart';
+
+import '../services/auth/auth.dart';
 
 final getIt = GetIt.instance;
 final talker = TalkerFlutter.init();
@@ -22,8 +25,13 @@ Future<void> setupLocator() async {
     ContentRepository(dio: dio),
   );
 
+  getIt.registerLazySingleton<AuthServiceInterface>(() => AuthService());
+
   getIt.registerSingleton(HomeBloc(getIt.get<ContentRepositoryInterface>()));
+
   getIt.registerFactory(
     () => DetailBloc(getIt.get<ContentRepositoryInterface>()),
   );
+
+  getIt.registerFactory(() => LogoutBloc(getIt.get<AuthServiceInterface>()));
 }
