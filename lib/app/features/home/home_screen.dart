@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../widgets/content_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../widgets/content_card.dart';
 import '../../../../di/di.dart';
 import 'bloc/bloc.dart';
+
+import '../auth/logout/logout.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,20 +28,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: BlocBuilder<HomeBloc, HomeState>(
-        bloc: _home,
-        builder: (context, state) {
-          return switch (state) {
-            HomeInitial() => const SizedBox.shrink(),
-            HomeLoadInProgress() => const Center(
-              child: CircularProgressIndicator(),
+    return BlocListener<LogoutBloc, LogoutState>(
+      listener: (context, state) {
+        if (state is LogoutSuccess) {
+          context.go('/login');
+        }
+
+        if (state is LogoutError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Home'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                context.read<LogoutBloc>().add(LogoutRequested());
+              },
             ),
-            HomeLoadSuccess() => _buildHomeLoadSuccess(state),
-            HomeLoadFailure() => _buildHomeLoadFailure(state),
-          };
-        },
+          ],
+        ),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          bloc: _home,
+          builder: (context, state) {
+            return switch (state) {
+              HomeInitial() => const SizedBox.shrink(),
+              HomeLoadInProgress() => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              HomeLoadSuccess() => _buildHomeLoadSuccess(state),
+              HomeLoadFailure() => _buildHomeLoadFailure(state),
+            };
+          },
+        ),
       ),
     );
   }
