@@ -6,12 +6,14 @@ class ContentCard extends StatelessWidget {
   final String imagePath; // путь к изображению
   final String title; // заголовок
   final String description; // описание
+  final int id;
 
   const ContentCard({
     super.key,
     required this.imagePath,
     required this.title,
     required this.description,
+    required this.id,
   });
 
   @override
@@ -22,11 +24,7 @@ class ContentCard extends StatelessWidget {
       onTap: () {
         context.push(
           '/detail',
-          extra: {
-            'image': imagePath,
-            'title': title,
-            'description': description,
-          },
+          extra: id, // <-- передаём только ID
         );
       },
       borderRadius: BorderRadius.circular(16),

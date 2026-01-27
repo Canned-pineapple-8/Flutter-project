@@ -9,12 +9,18 @@ class Content {
   final String description;
   @JsonKey(name: 'thumbnail')
   final String image;
+  final double price;
+  final double discountPercentage;
+  final double rating;
 
   Content({
     required this.id,
     required this.title,
     required this.description,
     required this.image,
+    required this.price,
+    required this.discountPercentage,
+    required this.rating,
   });
 
   factory Content.fromJson(Map<String, dynamic> json) =>
