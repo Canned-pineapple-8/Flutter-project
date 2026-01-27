@@ -3,8 +3,8 @@ import '../../di/di.dart';
 
 void setUpDio() {
   dio.options.baseUrl = 'https://dummyjson.com';
-  dio.options.connectTimeout = const Duration(seconds: 5);
-  dio.options.receiveTimeout = const Duration(seconds: 5);
+  dio.options.connectTimeout = const Duration(seconds: 15);
+  dio.options.receiveTimeout = const Duration(seconds: 15);
 
   dio.interceptors.addAll([
     TalkerDioLogger(

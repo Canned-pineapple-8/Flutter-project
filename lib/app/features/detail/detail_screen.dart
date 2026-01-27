@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../di/di.dart';
 import 'bloc/detail_bloc.dart';
 import '../../extensions/widget_extensions.dart';
+import '../favorite/favorite.dart';
 
 class DetailScreen extends StatefulWidget {
   final int id;
@@ -21,12 +22,45 @@ class _DetailScreenState extends State<DetailScreen> {
     super.initState();
     _bloc = getIt<DetailBloc>();
     _bloc.add(DetailLoad(widget.id));
+
+    context.read<FavoriteBloc>().add(FavoriteCheck(widget.id));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Detail")),
+      appBar: AppBar(
+        title: const Text("Detail"),
+        actions: [
+          BlocBuilder<FavoriteBloc, FavoriteState>(
+            builder: (context, state) {
+              final isFavorite =
+                  state is FavoriteStatusSuccess && state.isFavorite;
+
+              return IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : null,
+                ),
+                onPressed: () {
+                  final detailState = _bloc.state;
+                  if (detailState is! DetailLoadSuccess) return;
+
+                  final content = detailState.content;
+
+                  if (isFavorite) {
+                    context.read<FavoriteBloc>().add(
+                      FavoriteRemove(content.id),
+                    );
+                  } else {
+                    context.read<FavoriteBloc>().add(FavoriteAdd(content));
+                  }
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: BlocBuilder<DetailBloc, DetailState>(
         bloc: _bloc,
         builder: (context, state) {

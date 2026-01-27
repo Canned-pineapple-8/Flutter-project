@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../features/auth/signup/signup.dart';
 import '../features/auth/login/login.dart';
 import '../features/auth/logout/logout.dart';
+import '../features/favorite/favorite.dart';
 
 final _rootNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -42,7 +43,10 @@ final router = GoRouter(
 
         return MaterialPage(
           key: state.pageKey,
-          child: DetailScreen(id: id),
+          child: BlocProvider(
+            create: (_) => getIt<FavoriteBloc>(),
+            child: DetailScreen(id: id),
+          ),
         );
       },
     ),
@@ -66,6 +70,18 @@ final router = GoRouter(
           child: BlocProvider(
             create: (_) => LoginBloc(), // логика
             child: const LoginScreen(), // экран авторизации
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/favorite',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (_) => getIt<FavoriteBloc>()..add(FavoriteLoad()),
+            child: const FavoriteScreen(),
           ),
         );
       },

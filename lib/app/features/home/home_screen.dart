@@ -47,6 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Home'),
           actions: [
             IconButton(
+              icon: const Icon(Icons.favorite),
+              onPressed: () {
+                context.go('/favorite');
+              },
+            ),
+            IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
                 context.read<LogoutBloc>().add(LogoutRequested());
