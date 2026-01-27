@@ -7,18 +7,22 @@ abstract class SignUpState extends Equatable {
   List<Object?> get props => [];
 }
 
+// экран только открылся
 class SignUpInitial extends SignUpState {
   const SignUpInitial();
 }
 
+// идёт регистрация
 class SignUpLoading extends SignUpState {
   const SignUpLoading();
 }
 
+// регистрация успешная
 class SignUpSuccess extends SignUpState {
   const SignUpSuccess();
 }
 
+// ошибка при регистрации
 class SignUpError extends SignUpState {
   final String message;
 

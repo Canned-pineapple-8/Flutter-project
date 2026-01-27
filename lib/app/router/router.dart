@@ -52,8 +52,8 @@ final router = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: BlocProvider(
-            create: (_) => SignUpBloc(),
-            child: const SignUpScreen(),
+            create: (_) => SignUpBloc(), // логика
+            child: const SignUpScreen(), // экран регистрации
           ),
         );
       },
@@ -64,8 +64,8 @@ final router = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: BlocProvider(
-            create: (_) => LoginBloc(),
-            child: const LoginScreen(),
+            create: (_) => LoginBloc(), // логика
+            child: const LoginScreen(), // экран авторизации
           ),
         );
       },

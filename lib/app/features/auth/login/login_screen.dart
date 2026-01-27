@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // контроллеры почты и пароля
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -24,9 +25,11 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  // при нажатии кнопки
   void _onLoginPressed() {
     context.read<LoginBloc>().add(
       LoginRequested(
+        // убираем лишние пробелы
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       ),
@@ -40,9 +43,11 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
+            // при успешной авторизации переходим на домашнюю страницу
             context.go('/home');
           }
 
+          // иначе отображаем ошибку
           if (state is LoginError) {
             ScaffoldMessenger.of(
               context,
@@ -89,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
 
-              // 👇 переход к регистрации
+              // кнопка перехода к регистрации
               TextButton(
                 onPressed: () {
                   context.go('/signup');

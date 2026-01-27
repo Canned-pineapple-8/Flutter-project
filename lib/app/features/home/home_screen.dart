@@ -31,10 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocListener<LogoutBloc, LogoutState>(
       listener: (context, state) {
         if (state is LogoutSuccess) {
+          // возвращаемся на страницу авторизации при успешном выходе
           context.go('/login');
         }
 
         if (state is LogoutError) {
+          // или показываем ошибку
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));

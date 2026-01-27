@@ -7,6 +7,8 @@ abstract class SignUpEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+// запрос на регистрацию: отправляется по нажатию кнопки "Зарегистрироваться"
+// содержит почту и пароль, отправляется из UI в BLoC
 class SignUpRequested extends SignUpEvent {
   final String email;
   final String password;

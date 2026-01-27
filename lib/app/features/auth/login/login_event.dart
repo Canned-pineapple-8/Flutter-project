@@ -7,9 +7,10 @@ abstract class LoginEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+// запрос на авторизацию (по нажатию кнопки)
 class LoginRequested extends LoginEvent {
-  final String email;
-  final String password;
+  final String email; // почта
+  final String password; // пароль
 
   const LoginRequested({required this.email, required this.password});
 

@@ -14,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  // контроллеры полей ввода почты и пароля
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -27,12 +28,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void _onSignUpPressed() {
     context.read<SignUpBloc>().add(
       SignUpRequested(
+        // убираем лишние пробельные символы при отправке
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       ),
     );
   }
 
+  // отрисовка экрана
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: BlocListener<SignUpBloc, SignUpState>(
         listener: (context, state) {
           if (state is SignUpSuccess) {
+            // переход на /home при успешной регистрации
             context.go('/home');
           }
 
