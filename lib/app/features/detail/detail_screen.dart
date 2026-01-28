@@ -23,7 +23,9 @@ class _DetailScreenState extends State<DetailScreen> {
     _bloc = getIt<DetailBloc>();
     _bloc.add(DetailLoad(widget.id));
 
-    context.read<FavoriteBloc>().add(FavoriteCheck(widget.id));
+    context.read<FavoriteBloc>().add(
+      FavoriteCheck(widget.id),
+    ); // проверка на наличие в избранном
   }
 
   @override

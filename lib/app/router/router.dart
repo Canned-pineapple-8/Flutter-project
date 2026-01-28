@@ -44,7 +44,8 @@ final router = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: BlocProvider(
-            create: (_) => getIt<FavoriteBloc>(),
+            create: (_) =>
+                getIt<FavoriteBloc>(), // подключение логики избранного
             child: DetailScreen(id: id),
           ),
         );

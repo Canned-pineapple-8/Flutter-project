@@ -9,6 +9,7 @@ part 'favorite_state.dart';
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   final FavoriteDataServiceInterface favoriteService;
 
+  // конструктор
   FavoriteBloc(this.favoriteService) : super(FavoriteInitial()) {
     on<FavoriteLoad>(_onLoad);
     on<FavoriteAdd>(_onAdd);
@@ -20,6 +21,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     emit(FavoriteLoadInProgress());
 
     try {
+      // получаем список избранного
       final favorites = await favoriteService.getFavorites();
       emit(FavoriteLoadSuccess(favorites));
     } catch (e) {
@@ -29,6 +31,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
 
   Future<void> _onAdd(FavoriteAdd event, Emitter<FavoriteState> emit) async {
     try {
+      // добавляем в избранное
       await favoriteService.addToFavorites(event.content);
       emit(FavoriteStatusSuccess(true));
     } catch (e) {
@@ -41,6 +44,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     Emitter<FavoriteState> emit,
   ) async {
     try {
+      // удаляем из избранного
       await favoriteService.removeFromFavorites(event.productId);
       emit(FavoriteStatusSuccess(false));
     } catch (e) {
@@ -53,6 +57,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     Emitter<FavoriteState> emit,
   ) async {
     try {
+      // проверяем, находится ли продукт в избранном
       final isFavorite = await favoriteService.isFavorite(event.productId);
       emit(FavoriteStatusSuccess(isFavorite));
     } catch (e) {

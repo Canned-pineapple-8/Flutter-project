@@ -30,19 +30,23 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         bloc: _bloc,
         builder: (context, state) {
           if (state is FavoriteLoadInProgress) {
+            // индикатор загрузки
             return const Center(child: CircularProgressIndicator());
           }
 
           if (state is FavoriteFailure) {
+            // ошибка
             return Center(child: Text('Ошибка: ${state.message}'));
           }
 
           if (state is FavoriteLoadSuccess) {
+            // сообщение о пустом списке избранного
             if (state.favorites.isEmpty) {
               return const Center(child: Text('Список избранного пуст'));
             }
 
             return ListView.builder(
+              // отображаем список
               itemCount: state.favorites.length,
               itemBuilder: (_, index) {
                 final item = state.favorites[index];
