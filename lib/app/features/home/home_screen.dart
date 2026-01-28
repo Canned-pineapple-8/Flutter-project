@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.favorite),
               onPressed: () {
-                context.go('/favorite');
+                context.go('/favorite'); // переход на страницу избранного
               },
             ),
             IconButton(
